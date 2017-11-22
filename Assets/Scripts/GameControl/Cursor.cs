@@ -12,6 +12,7 @@ public class Cursor : MonoBehaviour
     int layerZone = 11;
     int zoneAntiquarian = 13;
 
+
     public GameObject antiquarian;
     // Use this for initialization
     void Start()
@@ -32,7 +33,7 @@ public class Cursor : MonoBehaviour
 
         this.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetMouseButtonDown(0) && Antiquarian.instance.CanWork())
+        if (Input.GetMouseButtonDown(0))
         {
             child = null;
             childsParent = null;
@@ -44,7 +45,7 @@ public class Cursor : MonoBehaviour
 
             if (hit.collider != null)
             {
-                if (hit.collider.gameObject.layer == LayerAntique)
+                if (hit.collider.gameObject.layer == LayerAntique && Antiquarian.instance.CanWork())
                 {
                     Debug.Log("Antique: " + hit.collider.gameObject.name);
                     child = hit.transform;
@@ -58,6 +59,22 @@ public class Cursor : MonoBehaviour
                     hit.collider.gameObject.layer = LayerIgnoreRaycast;
                     sellNote.SetActive(true);
                 }
+                else if (hit.collider.gameObject.layer == zoneAntiquarian)
+                {
+                    if(!Antiquarian.instance.here)
+                    {
+                        Antiquarian.ComeBack();
+                    }
+                    Debug.Log("CLICK ANTIQUARIAN: " + hit.collider.gameObject.name);
+                }
+                else
+                {
+                    Debug.Log("CLICK : " + hit.collider.gameObject.name);
+                }
+            }
+            else
+            {
+                Debug.Log("CLICK : null");
             }
             
         }

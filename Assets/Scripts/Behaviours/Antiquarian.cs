@@ -76,8 +76,13 @@ public class Antiquarian : MonoBehaviour {
     public static void GoAway(float minutes)
     {
         instance.hideTimer = minutes * 60;
+        instance.renderer.enabled = false;
     }
-
+    public static void ComeBack()
+    {
+        instance.hideTimer = 0;
+        instance.renderer.enabled = true;
+    }
     bool overit = false;
     float timer = 0;
     void OnMouseOver()

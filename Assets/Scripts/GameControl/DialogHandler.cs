@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
 public class DialogHandler : MonoBehaviour
 {
 
@@ -21,6 +22,7 @@ public class DialogHandler : MonoBehaviour
     float love = 100;
     bool family = true;
 
+    public Toggle TGLNotify;
     enum EventType { NOTHING, BED, FOOD, PLAY, SHAVE }
     EventType currentEvent = EventType.NOTHING;
     // Use this for initialization
@@ -33,7 +35,6 @@ public class DialogHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (TimeHandler.hour == 1)
         {
             Qsleep = false;
@@ -45,6 +46,7 @@ public class DialogHandler : MonoBehaviour
             {
                 dialogDoorbell.SetActive(true);
                 eventTimer = 60 * 60;
+                Notify();
             }
         }
         if (!Qsleep && family && TimeHandler.hour >= 22 && TimeHandler.hour <= 23)
@@ -55,15 +57,17 @@ public class DialogHandler : MonoBehaviour
             ShowOptions();
             dialogSleep.SetActive(true);
             Qsleep = true;
+            Notify();
         }
 
         // YOU SHOULD SHAVE
-        if (love>0 && Antiquarian.instance.beardLength > 100 && eventTimer <= 0 && Random.value < 0.01f)
+        if (love > 0 && Antiquarian.instance.beardLength > 100 && eventTimer <= 0 && Random.value < 0.01f)
         {
             eventTimer = 60 * 60;
             currentEvent = EventType.SHAVE;
             dialogBeard.SetActive(true);
             Qshave = true;
+            Notify();
         }
 
         if (eventTimer <= 0)
@@ -91,6 +95,7 @@ public class DialogHandler : MonoBehaviour
     {
         Debug.Log("No...");
         StartCoroutine(SelectAnswer(false));
+        
         // HideOptions();
     }
     public void AntiquiarianPicksPackage()
@@ -100,7 +105,15 @@ public class DialogHandler : MonoBehaviour
         float delay = Random.Range(0, 2);
         Antiquarian.GoAway(delay);
         Spawner.Spawn(0);
+        Notify();
 
+    }
+    void Notify()
+    {
+        if (TGLNotify.isOn)
+        {
+             TimeHandler.instance.Pause();
+        }
     }
     IEnumerator SelectAnswer(bool yes)
     {
@@ -130,6 +143,7 @@ public class DialogHandler : MonoBehaviour
         }
         if (dialogSleep.activeSelf) dialogSleep.SetActive(false);
         if (dialogBeard.activeSelf) dialogBeard.SetActive(false);
+        Notify();
     }
 
     void ShowOptions()

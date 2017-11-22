@@ -15,6 +15,7 @@ public class TimeHandler : MonoBehaviour
 
     public Text timeText;
 
+    bool end = false;
     bool paused = false;
     float speed = 1;
 
@@ -24,6 +25,7 @@ public class TimeHandler : MonoBehaviour
     public Button BTNPause;
     public Button BTNPlay;
     public Button BTNFF;
+    
     // Use this for initialization
     void Start()
     {
@@ -71,7 +73,14 @@ public class TimeHandler : MonoBehaviour
             if (hour > 19 || hour < 7)
 
             {
-                AmbientLight.intensity = Mathf.MoveTowards(AmbientLight.intensity, 1, DeltaTime / 3600);
+                if (hour > 20 || hour < 6)
+                {
+                    AmbientLight.intensity = Mathf.MoveTowards(AmbientLight.intensity, 1, 1);
+                }
+                else
+                {
+                    AmbientLight.intensity = Mathf.MoveTowards(AmbientLight.intensity, 1, DeltaTime / 3600);
+                }
             }
 
             else
@@ -86,6 +95,20 @@ public class TimeHandler : MonoBehaviour
         if (!Antiquarian.instance.alive)
         {
             AmbientLight.intensity = Mathf.MoveTowards(AmbientLight.intensity, 0.25f, Time.deltaTime / 4);
+        }
+
+        BTNPlay.interactable = !end;
+        BTNPause.interactable = !end;
+        BTNFF.interactable = !paused;
+        if (paused)
+        {
+            ColorBlock clr = BTNPause.colors;
+            clr.normalColor = Color.gray;
+        }
+        else
+        {
+            ColorBlock clr = BTNPause.colors;
+            clr.normalColor = Color.white;
         }
     }
 
@@ -108,6 +131,7 @@ public class TimeHandler : MonoBehaviour
     public void End()
     {
         paused = true;
+        end = true;
     }
     public void Pause()
     {
