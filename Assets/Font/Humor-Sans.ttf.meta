@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c026ecdd41afe32439e656d24c78fddf
+timeCreated: 1510962809
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Humor Sans
+  fontNames:
+  - Humor Sans
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

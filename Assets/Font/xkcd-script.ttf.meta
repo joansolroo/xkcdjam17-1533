@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 81aaaea0db4ce7049b12d03d17aa36dc
+timeCreated: 1510961087
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: xkcd Script
+  fontNames:
+  - xkcd Script
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
