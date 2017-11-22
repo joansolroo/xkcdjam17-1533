@@ -12,7 +12,6 @@ public class Cursor : MonoBehaviour
     int layerZone = 11;
     int zoneAntiquarian = 13;
 
-
     public GameObject antiquarian;
     // Use this for initialization
     void Start()
@@ -27,6 +26,8 @@ public class Cursor : MonoBehaviour
     Quaternion childsRot;
 
     public GameObject sellNote;
+    public GameObject chairNote;
+
     // Update is called once per frame
     void Update()
     {
@@ -76,8 +77,28 @@ public class Cursor : MonoBehaviour
             {
                 Debug.Log("CLICK : null");
             }
-            
+
         }
+        else
+        {
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
+            bool showChairNote = false;
+            if (hit.collider != null)
+            {
+                if (hit.collider.gameObject.layer == zoneAntiquarian && !Antiquarian.instance.here)
+                {
+                    if (!Antiquarian.instance.here)
+                    {
+                        showChairNote = true;
+                      
+                    }
+                    //Debug.Log("CLICK ANTIQUARIAN: " + hit.collider.gameObject.name);
+                }
+            }
+            chairNote.SetActive(showChairNote);
+        }
+        
 
         if (Input.GetMouseButtonUp(0))
         {

@@ -93,11 +93,11 @@ public class Antiquarian : MonoBehaviour {
         timer += Time.deltaTime;
         if (timer > 1)
         {
-            if (alive)
+            if (alive && here)
             {
                 Alttext.Show((int)Input.mousePosition.x, (int)Input.mousePosition.y, "Me, age: " + age.ToString("0.0") + "\nbeard length: " + beardLength.ToString("0.0") + "mm");
             }
-            else
+            else if (!alive)
             {
                 Alttext.Show((int)Input.mousePosition.x, (int)Input.mousePosition.y, "Me, age: " + age.ToString("0.0") + "\nAnd I think i am dead.");
             }

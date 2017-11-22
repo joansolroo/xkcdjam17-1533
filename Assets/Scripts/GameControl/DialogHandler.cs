@@ -18,8 +18,10 @@ public class DialogHandler : MonoBehaviour
     bool Qsleep = false;
     public GameObject dialogBeard;
     bool Qshave = false;
+
     public GameObject dialogPlay;
-    float love = 100;
+    bool Qplay = false;
+    public float love = 100;
     bool family = true;
 
     public Toggle TGLNotify;
@@ -38,18 +40,19 @@ public class DialogHandler : MonoBehaviour
         if (TimeHandler.hour == 1)
         {
             Qsleep = false;
+            Qplay = false;
         }
         if (TimeHandler.hour >= 9 && TimeHandler.hour <= 11)
         {
             // PERHAPS FEDEX WILL BRING A PACKAGE
-            if (!dialogDoorbell.activeSelf && Random.value < 0.01 && eventTimer <= 0)
+            if (!dialogDoorbell.activeSelf && Random.value < 0.05 && eventTimer <= 0)
             {
                 dialogDoorbell.SetActive(true);
                 eventTimer = 60 * 60;
                 Notify();
             }
         }
-        if (!Qsleep && family && TimeHandler.hour >= 22 && TimeHandler.hour <= 23)
+        if (!Qsleep && love > 0 && family && TimeHandler.hour >= 22 && TimeHandler.hour <= 23)
         {
             //GO TO BED
             eventTimer = 60 * 60;
@@ -57,6 +60,16 @@ public class DialogHandler : MonoBehaviour
             ShowOptions();
             dialogSleep.SetActive(true);
             Qsleep = true;
+            Notify();
+        }
+        if (!Qplay && love > 0 && family && TimeHandler.hour >= 18 && TimeHandler.hour <= 20 && Random.value <0.02f)
+        {
+            //GO TO BED
+            eventTimer = 60 * 60;
+            currentEvent = EventType.PLAY;
+            ShowOptions();
+            dialogPlay.SetActive(true);
+            Qplay = true;
             Notify();
         }
 
@@ -72,11 +85,30 @@ public class DialogHandler : MonoBehaviour
 
         if (eventTimer <= 0)
         {
-            if (dialogDoorbell.activeSelf) dialogDoorbell.SetActive(false);
-            if (dialogSleep.activeSelf) dialogSleep.SetActive(false);
-            if (dialogBeard.activeSelf) dialogBeard.SetActive(false);
+            bool failed = false;
+            if (dialogDoorbell.activeSelf)
+            {
+                dialogDoorbell.SetActive(false);
+                failed = true;
+            }
+            if (dialogSleep.activeSelf)
+            {
+                dialogSleep.SetActive(false);
+                failed = true;
+            }
+            if (dialogBeard.activeSelf)
+            {
+                dialogBeard.SetActive(false);
+                failed = true;
+            }
+            if (dialogPlay.activeSelf)
+            {
+                dialogPlay.SetActive(false);
+                failed = true;
+            }
             HideOptions();
-            love -= 5;
+            if (failed)
+                love -= 5;
         }
         else
         {
@@ -95,7 +127,7 @@ public class DialogHandler : MonoBehaviour
     {
         Debug.Log("No...");
         StartCoroutine(SelectAnswer(false));
-        
+
         // HideOptions();
     }
     public void AntiquiarianPicksPackage()
@@ -112,7 +144,7 @@ public class DialogHandler : MonoBehaviour
     {
         if (TGLNotify.isOn)
         {
-             TimeHandler.instance.Pause();
+            TimeHandler.instance.Pause();
         }
     }
     IEnumerator SelectAnswer(bool yes)

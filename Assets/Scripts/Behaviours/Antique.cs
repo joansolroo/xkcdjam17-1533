@@ -48,7 +48,7 @@ public class Antique : MonoBehaviour
         }
         else if (type == AntiqueType.Underapreciated)
         {
-            resellValue = Mathf.Max(minValue, resellValue - Random.Range(0.01f, 0.05f) * initialValue * TimeHandler.DeltaTime);
+            resellValue = Mathf.Max(minValue, resellValue + Random.Range(-0.1f, 1.15f) * initialValue * TimeHandler.DeltaTime);
         }
         
     }

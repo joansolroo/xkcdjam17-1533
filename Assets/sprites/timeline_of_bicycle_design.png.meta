@@ -1,12 +1,15 @@
 fileFormatVersion: 2
 guid: 3090a899dfa8dc646bf13aca8cf4017d
-timeCreated: 1511108927
+timeCreated: 1511385804
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: timeline_of_bicycle_design_0
     21300002: timeline_of_bicycle_design_1
     21300004: timeline_of_bicycle_design_2
+    21300006: timeline_of_bicycle_design_4
+    21300008: timeline_of_bicycle_design_3
+    21300010: timeline_of_bicycle_design_5
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -89,7 +92,7 @@ TextureImporter:
         width: 66
         height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -102,7 +105,7 @@ TextureImporter:
         width: 94
         height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -116,6 +119,45 @@ TextureImporter:
         height: 74
       alignment: 9
       pivot: {x: 0.5781257, y: 0.42989844}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: timeline_of_bicycle_design_4
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 161
+        width: 93
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: timeline_of_bicycle_design_3
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 39
+        width: 118
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: timeline_of_bicycle_design_5
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 41
+        width: 144
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
