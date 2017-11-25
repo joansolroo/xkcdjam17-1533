@@ -47,7 +47,7 @@ public class TimeHandler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Pause();
+            TogglePause();
         }
         if (!paused)
         {
@@ -133,9 +133,13 @@ public class TimeHandler : MonoBehaviour
         paused = true;
         end = true;
     }
-    public void Pause()
+    public void TogglePause()
     {
         paused = !paused;
+    }
+    public void pause(bool state = true)
+    {
+        paused = state;
     }
 
     public void Play()

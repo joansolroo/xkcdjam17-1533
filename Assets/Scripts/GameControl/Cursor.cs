@@ -11,7 +11,7 @@ public class Cursor : MonoBehaviour
     int layerDialog = 10;
     int layerZone = 11;
     int zoneAntiquarian = 13;
-
+    int zoneChart = 14;
     public GameObject antiquarian;
     // Use this for initialization
     void Start()
@@ -67,6 +67,10 @@ public class Cursor : MonoBehaviour
                         Antiquarian.ComeBack();
                     }
                     Debug.Log("CLICK ANTIQUARIAN: " + hit.collider.gameObject.name);
+                }
+                else if (hit.collider.gameObject.layer == zoneChart)
+                {
+                    hit.collider.gameObject.SetActive(false);
                 }
                 else
                 {

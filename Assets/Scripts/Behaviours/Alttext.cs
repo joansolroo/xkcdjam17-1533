@@ -43,7 +43,7 @@ public class Alttext : MonoBehaviour
     {
         textbox.text = text;
         textbox.gameObject.SetActive(true);
-        textbox.transform.position = new Vector3(x+20, y+40, +5);
+        textbox.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x+20, y+40, +5));
     }
     public static void Hide()
     {

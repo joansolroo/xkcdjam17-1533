@@ -49,7 +49,7 @@ public class DialogHandler : MonoBehaviour
             {
                 dialogDoorbell.SetActive(true);
                 eventTimer = 60 * 60;
-                Notify();
+                NotifyStartEvent();
             }
         }
         if (!Qsleep && love > 0 && family && TimeHandler.hour >= 22 && TimeHandler.hour <= 23)
@@ -60,7 +60,7 @@ public class DialogHandler : MonoBehaviour
             ShowOptions();
             dialogSleep.SetActive(true);
             Qsleep = true;
-            Notify();
+            NotifyStartEvent();
         }
         if (!Qplay && love > 0 && family && TimeHandler.hour >= 18 && TimeHandler.hour <= 20 && Random.value <0.02f)
         {
@@ -70,7 +70,7 @@ public class DialogHandler : MonoBehaviour
             ShowOptions();
             dialogPlay.SetActive(true);
             Qplay = true;
-            Notify();
+            NotifyStartEvent();
         }
 
         // YOU SHOULD SHAVE
@@ -80,7 +80,7 @@ public class DialogHandler : MonoBehaviour
             currentEvent = EventType.SHAVE;
             dialogBeard.SetActive(true);
             Qshave = true;
-            Notify();
+            NotifyStartEvent();
         }
 
         if (eventTimer <= 0)
@@ -137,14 +137,21 @@ public class DialogHandler : MonoBehaviour
         float delay = Random.Range(0, 2);
         Antiquarian.GoAway(delay);
         Spawner.Spawn(0);
-        Notify();
+        NotifyEndEvent();
 
     }
-    void Notify()
+    void NotifyStartEvent()
     {
         if (TGLNotify.isOn)
         {
-            TimeHandler.instance.Pause();
+            TimeHandler.instance.pause();
+        }
+    }
+    void NotifyEndEvent()
+    {
+        if (TGLNotify.isOn)
+        {
+            TimeHandler.instance.pause(false);
         }
     }
     IEnumerator SelectAnswer(bool yes)
@@ -175,7 +182,11 @@ public class DialogHandler : MonoBehaviour
         }
         if (dialogSleep.activeSelf) dialogSleep.SetActive(false);
         if (dialogBeard.activeSelf) dialogBeard.SetActive(false);
-        Notify();
+        if (dialogBeard.activeSelf) dialogBeard.SetActive(false);
+        
+        if (dialogPlay.activeSelf) dialogPlay.SetActive(false);
+
+        NotifyEndEvent();
     }
 
     void ShowOptions()

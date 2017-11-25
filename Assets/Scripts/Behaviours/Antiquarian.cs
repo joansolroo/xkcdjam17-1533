@@ -34,7 +34,13 @@ public class Antiquarian : MonoBehaviour {
         }
         if (hideTimer > 0)
         {
-            hideTimer -= TimeHandler.DeltaTime;
+            float delta = Mathf.Min(TimeHandler.DeltaTime, hideTimer);
+            hideTimer -= delta;
+            StatsHandler.instance.timeDistribution[StatsHandler.TIME_FAMILY] += delta;
+        }
+        else
+        {
+            StatsHandler.instance.timeDistribution[StatsHandler.TIME_WORK] += TimeHandler.DeltaTime;
         }
         here = hideTimer <= 0;
         renderer.enabled = here;
